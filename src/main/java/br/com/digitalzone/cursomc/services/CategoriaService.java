@@ -14,9 +14,9 @@ public class CategoriaService {
 	@Autowired
 	private CategoriaRepository repo;
 	
-	public Optional<Categoria> buscar(Integer Id) {
+	public Categoria buscar(Integer Id) {
 		Optional<Categoria> obj = repo.findById(Id);
 		
-		return obj;
+		return obj.orElse(null);
 	}
 }

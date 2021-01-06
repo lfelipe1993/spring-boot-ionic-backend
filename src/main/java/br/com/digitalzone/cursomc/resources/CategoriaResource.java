@@ -1,9 +1,5 @@
 package br.com.digitalzone.cursomc.resources;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +20,7 @@ public class CategoriaResource {
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<?> find(@PathVariable Integer id) {
 		
-		Optional<Categoria> obj = service.buscar(id);
+		Categoria obj = service.buscar(id);
 		
 		return ResponseEntity.ok().body(obj);
 		
