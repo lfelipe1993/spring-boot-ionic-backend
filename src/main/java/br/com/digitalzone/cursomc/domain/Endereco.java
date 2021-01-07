@@ -9,8 +9,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Endereco implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,6 +25,7 @@ public class Endereco implements Serializable {
 	private String bairro;
 	private String cep;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
