@@ -10,14 +10,19 @@ import br.com.digitalzone.cursomc.repositories.CategoriaRepository;
 
 @Service
 public class CategoriaService {
-	
+
 	@Autowired
 	private CategoriaRepository repo;
-	
+
 	public Categoria buscar(Integer id) {
 		Optional<Categoria> obj = repo.findById(id);
-		
-		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! id: "
-																+ id));
+
+		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! id: " + id));
+	}
+
+	public Categoria insert(Categoria cat) {
+		cat.setId(null);
+
+		return repo.save(cat);
 	}
 }
