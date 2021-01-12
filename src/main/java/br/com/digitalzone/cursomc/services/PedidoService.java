@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.digitalzone.cursomc.domain.Pedido;
 import br.com.digitalzone.cursomc.repositories.PedidoRepository;
+import br.com.digitalzone.cursomc.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class PedidoService {

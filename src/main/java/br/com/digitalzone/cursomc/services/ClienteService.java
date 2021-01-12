@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.digitalzone.cursomc.domain.Cliente;
 import br.com.digitalzone.cursomc.repositories.ClienteRepository;
+import br.com.digitalzone.cursomc.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class ClienteService {

@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import br.com.digitalzone.cursomc.domain.Categoria;
 import br.com.digitalzone.cursomc.repositories.CategoriaRepository;
+import br.com.digitalzone.cursomc.services.exceptions.DataIntegrityException;
+import br.com.digitalzone.cursomc.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class CategoriaService {
@@ -29,5 +31,14 @@ public class CategoriaService {
 	public Categoria update(Categoria cat) {
 		find(cat.getId());
 		return repo.save(cat);
+	}
+	
+	public void delete(Integer id) {
+		find(id);
+		try {
+		repo.deleteById(id);
+		}catch (org.springframework.dao.DataIntegrityViolationException e) {
+			throw new DataIntegrityException("Não é possível excluir uma categoria associada a um produto!");
+		}
 	}
 }

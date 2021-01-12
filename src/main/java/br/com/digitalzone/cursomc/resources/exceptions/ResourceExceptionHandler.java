@@ -1,4 +1,4 @@
-package br.com.digitalzone.cursomc.resources.exception;
+package br.com.digitalzone.cursomc.resources.exceptions;
 
 import java.time.OffsetDateTime;
 
@@ -9,7 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import br.com.digitalzone.cursomc.services.ObjectNotFoundException;
+import br.com.digitalzone.cursomc.services.exceptions.DataIntegrityException;
+import br.com.digitalzone.cursomc.services.exceptions.ObjectNotFoundException;
 
 @ControllerAdvice
 public class ResourceExceptionHandler {
@@ -22,5 +23,15 @@ public class ResourceExceptionHandler {
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(err);
 		
 	}
+	
+	@ExceptionHandler(DataIntegrityException.class)
+	public ResponseEntity<StandardError> dataIntegrity(DataIntegrityException e, HttpServletRequest request){
+		StandardError err = new StandardError(HttpStatus.BAD_REQUEST.value(), e.getMessage(),
+				OffsetDateTime.now());
+		
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
+		
+	}
+
 
 }

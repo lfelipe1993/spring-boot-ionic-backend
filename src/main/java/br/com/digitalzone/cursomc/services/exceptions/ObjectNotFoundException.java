@@ -1,4 +1,4 @@
-package br.com.digitalzone.cursomc.services;
+package br.com.digitalzone.cursomc.services.exceptions;
 
 public class ObjectNotFoundException extends RuntimeException {
 

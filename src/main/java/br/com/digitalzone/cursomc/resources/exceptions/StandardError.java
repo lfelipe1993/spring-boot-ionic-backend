@@ -1,4 +1,4 @@
-package br.com.digitalzone.cursomc.resources.exception;
+package br.com.digitalzone.cursomc.resources.exceptions;
 
 import java.io.Serializable;
 import java.time.OffsetDateTime;
