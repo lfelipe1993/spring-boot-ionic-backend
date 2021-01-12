@@ -1,5 +1,6 @@
 package br.com.digitalzone.cursomc.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,5 +41,9 @@ public class CategoriaService {
 		}catch (org.springframework.dao.DataIntegrityViolationException e) {
 			throw new DataIntegrityException("Não é possível excluir uma categoria associada a um produto!");
 		}
+	}
+	
+	public List<Categoria> findAll(){
+		return repo.findAll();
 	}
 }
