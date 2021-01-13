@@ -1,6 +1,5 @@
 package br.com.digitalzone.cursomc.services;
 
-import java.nio.file.DirectoryNotEmptyException;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.digitalzone.cursomc.domain.Categoria;
 import br.com.digitalzone.cursomc.repositories.CategoriaRepository;
+import br.com.digitalzone.cursomc.resources.dto.CategoriaDTO;
 import br.com.digitalzone.cursomc.services.exceptions.DataIntegrityException;
 import br.com.digitalzone.cursomc.services.exceptions.ObjectNotFoundException;
 
@@ -58,5 +58,10 @@ public class CategoriaService {
 		
 		return repo.findAll(pageRequest);
 	}
+	
+	public Categoria fromDTO(CategoriaDTO catDto) {
+		return new Categoria(catDto.getId(),catDto.getNome());
+	}
+	
 	
 }
