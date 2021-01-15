@@ -22,6 +22,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.digitalzone.cursomc.domain.Cliente;
 import br.com.digitalzone.cursomc.resources.dto.ClienteDTO;
+import br.com.digitalzone.cursomc.resources.dto.ClienteNewDTO;
 import br.com.digitalzone.cursomc.services.ClienteService;
 
 @RestController
@@ -30,6 +31,7 @@ public class ClienteResource {
 	
 	@Autowired
 	private ClienteService service;
+
 	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Cliente> find(@PathVariable Integer id) {
@@ -41,13 +43,13 @@ public class ClienteResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Void> insert(@RequestBody @Valid ClienteDTO cliDto) {
+	public ResponseEntity<Void> insert(@RequestBody @Valid ClienteNewDTO cliDto) {
 		Cliente obj = service.fromDTO(cliDto);
 		obj = service.insert(obj);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+				.buildAndExpand(obj.getId()).toUri();
 
 		return ResponseEntity.created(uri).build();
-
 	}
 
 	@PutMapping(value = "/{id}")
