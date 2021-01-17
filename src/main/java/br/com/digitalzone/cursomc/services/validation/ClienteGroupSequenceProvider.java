@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.hibernate.validator.spi.group.DefaultGroupSequenceProvider;
 
-import br.com.digitalzone.cursomc.domain.Cliente;
 import br.com.digitalzone.cursomc.domain.enums.tipocliente.CnpjGroup;
 import br.com.digitalzone.cursomc.domain.enums.tipocliente.CpfGroup;
 import br.com.digitalzone.cursomc.domain.enums.tipocliente.TipoCliente;
@@ -25,9 +24,7 @@ public class ClienteGroupSequenceProvider implements DefaultGroupSequenceProvide
 			}else if(cliente.getTipo() == TipoCliente.PESSOAJURIDICA.getCod()){
 				groups.add(CnpjGroup.class);
 			}
-			
-			
-
+		
 		}
 
 		return groups;

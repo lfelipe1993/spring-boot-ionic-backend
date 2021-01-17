@@ -13,7 +13,9 @@ import org.hibernate.validator.group.GroupSequenceProvider;
 import br.com.digitalzone.cursomc.domain.enums.tipocliente.CnpjGroup;
 import br.com.digitalzone.cursomc.domain.enums.tipocliente.CpfGroup;
 import br.com.digitalzone.cursomc.services.validation.ClienteGroupSequenceProvider;
+import br.com.digitalzone.cursomc.services.validation.ClienteInsert;
 
+@ClienteInsert
 @GroupSequenceProvider(ClienteGroupSequenceProvider.class)
 public class ClienteNewDTO implements Serializable {
 
