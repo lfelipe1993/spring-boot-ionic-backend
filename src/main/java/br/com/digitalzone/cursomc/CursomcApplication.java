@@ -20,7 +20,7 @@ import br.com.digitalzone.cursomc.domain.PagamentoComCartao;
 import br.com.digitalzone.cursomc.domain.Pedido;
 import br.com.digitalzone.cursomc.domain.Produto;
 import br.com.digitalzone.cursomc.domain.enums.EstadoPagamento;
-import br.com.digitalzone.cursomc.domain.enums.TipoCliente;
+import br.com.digitalzone.cursomc.domain.enums.tipocliente.TipoCliente;
 import br.com.digitalzone.cursomc.repositories.CategoriaRepository;
 import br.com.digitalzone.cursomc.repositories.CidadeRepository;
 import br.com.digitalzone.cursomc.repositories.ClienteRepository;
@@ -103,7 +103,7 @@ public class CursomcApplication implements CommandLineRunner {
 		
 		//-----------------------------------------------------------
 		
-		Cliente cli1 = new Cliente(null, "Maria Silva","maria@gmail.com","40522233344", TipoCliente.PESSOAFISICA);
+		Cliente cli1 = new Cliente(null, "Maria Silva","maria@gmail.com","37042810007", TipoCliente.PESSOAFISICA);
 		
 		cli1.getTelefones().addAll(Arrays.asList("18996180932","18997180932"));
 		

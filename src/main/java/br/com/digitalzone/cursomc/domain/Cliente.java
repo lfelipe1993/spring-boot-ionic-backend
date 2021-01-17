@@ -15,9 +15,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.hibernate.validator.constraints.br.CNPJ;
+import org.hibernate.validator.constraints.br.CPF;
+import org.hibernate.validator.group.GroupSequenceProvider;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import br.com.digitalzone.cursomc.domain.enums.TipoCliente;
+import br.com.digitalzone.cursomc.domain.enums.tipocliente.CnpjGroup;
+import br.com.digitalzone.cursomc.domain.enums.tipocliente.CpfGroup;
+import br.com.digitalzone.cursomc.domain.enums.tipocliente.TipoCliente;
+import br.com.digitalzone.cursomc.services.validation.ClienteGroupSequenceProvider;
 
 @Entity
 public class Cliente implements Serializable {

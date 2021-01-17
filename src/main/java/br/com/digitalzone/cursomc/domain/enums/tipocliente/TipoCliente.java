@@ -1,15 +1,17 @@
-package br.com.digitalzone.cursomc.domain.enums;
+package br.com.digitalzone.cursomc.domain.enums.tipocliente;
 
 public enum TipoCliente {
 
-	PESSOAFISICA(1, "Pessoa Física"), PESSOAJURIDICA(2, "Pessoa Jurídica");
+	PESSOAFISICA(1, "Pessoa Física", CpfGroup.class), PESSOAJURIDICA(2, "Pessoa Jurídica", CnpjGroup.class);
 
 	private int cod;
 	private String descricao;
+	private Class<?> grupo;
 
-	private TipoCliente(int cod, String descricao) {
+	private TipoCliente(int cod, String descricao, Class<?> grupo) {
 		this.cod = cod;
 		this.descricao = descricao;
+		this.grupo = grupo;
 	}
 
 	public int getCod() {
@@ -18,6 +20,10 @@ public enum TipoCliente {
 
 	public String getDescricao() {
 		return descricao;
+	}
+
+	public Class<?> getGrupo() {
+		return grupo;
 	}
 
 	public static TipoCliente toEnum(Integer cod) {
@@ -34,3 +40,5 @@ public enum TipoCliente {
 		throw new IllegalArgumentException("Id inválido: " + cod);
 	}
 }
+
+

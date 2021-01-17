@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import br.com.digitalzone.cursomc.domain.Cidade;
 import br.com.digitalzone.cursomc.domain.Cliente;
 import br.com.digitalzone.cursomc.domain.Endereco;
-import br.com.digitalzone.cursomc.domain.enums.TipoCliente;
+import br.com.digitalzone.cursomc.domain.enums.tipocliente.TipoCliente;
 import br.com.digitalzone.cursomc.repositories.CidadeRepository;
 import br.com.digitalzone.cursomc.repositories.ClienteRepository;
 import br.com.digitalzone.cursomc.repositories.EnderecoRepository;
