@@ -26,7 +26,6 @@ public class DevConfig {
 		if (!"create".equals(strategy)) {
 			return false;
 		}
-		
 		dbService.instantiateDatabaseService();
 		return true;
 	}
