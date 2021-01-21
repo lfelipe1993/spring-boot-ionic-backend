@@ -1,8 +1,11 @@
 package br.com.digitalzone.cursomc.domain;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -139,6 +142,34 @@ public class Pedido implements Serializable {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt-br", "BR"));
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+		
+		builder.append("Pedido: ");
+		builder.append(getId());
+		builder.append(", Instante: ");
+		builder.append(sdf.format(getInstante()));
+		builder.append(", Cliente:");
+		builder.append(getCliente().getNome());
+		builder.append(", Situação do Pagamento:");
+		builder.append(getPagamento().getEstado().getDescricao());
+		builder.append("\n Situação do Pagamento \n");
+		
+		for(ItemPedido ip: getItens()) {
+			builder.append(ip.toString());
+		}
+		
+		builder.append("Valor total: ");
+		builder.append(nf.format(getValorTotal()));
+		
+		return builder.toString();
+	}
 	
 
+	
+	
 }
