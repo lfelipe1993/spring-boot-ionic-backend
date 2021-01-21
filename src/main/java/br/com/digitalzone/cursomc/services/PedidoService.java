@@ -14,6 +14,7 @@ import br.com.digitalzone.cursomc.repositories.ItemPedidoRepository;
 import br.com.digitalzone.cursomc.repositories.PagamentoRepository;
 import br.com.digitalzone.cursomc.repositories.PedidoRepository;
 import br.com.digitalzone.cursomc.services.exceptions.ObjectNotFoundException;
+import br.com.digitalzone.cursomc.services.mail.EmailService;
 
 @Service
 public class PedidoService {
@@ -35,6 +36,9 @@ public class PedidoService {
 	
 	@Autowired
 	private ClienteService clienteService;
+	
+	@Autowired
+	private EmailService emailService;
 	
 	public Pedido find(Integer id) {
 		Optional<Pedido> obj = repo.findById(id);
@@ -68,7 +72,7 @@ public class PedidoService {
 		
 		itemPedidoRepository.saveAll(ped.getItens());
 		
-		System.out.println(ped);
+		emailService.sendOrderConfirmationEmail(ped);
 		return ped;
 	}
 }
