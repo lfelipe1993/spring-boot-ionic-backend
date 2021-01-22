@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.digitalzone.cursomc.domain.Cidade;
@@ -32,6 +33,8 @@ public class ClienteService {
 	private CidadeRepository cidadeRepo;
 	@Autowired
 	private EnderecoRepository enderecoRepo;
+	@Autowired
+	BCryptPasswordEncoder pEnc;
 
 	public Cliente find(Integer id) {
 		Optional<Cliente> obj = repo.findById(id);
@@ -77,12 +80,12 @@ public class ClienteService {
 	}
 
 	public Cliente fromDTO(ClienteDTO cliDto) {
-		return new Cliente(cliDto.getId(),cliDto.getNome(),cliDto.getEmail(), null, null);
+		return new Cliente(cliDto.getId(),cliDto.getNome(),cliDto.getEmail(), null, null,null);
 	}
 	
 	public Cliente fromDTO(ClienteNewDTO cliDto) {
 		Cliente cli = new Cliente(null,cliDto.getNome(),cliDto.getEmail(),
-				cliDto.getCpfOuCnpj(),TipoCliente.toEnum(cliDto.getTipo()));
+				cliDto.getCpfOuCnpj(),TipoCliente.toEnum(cliDto.getTipo()), pEnc.encode(cliDto.getSenha()));
 		
 		Cidade cid = cidadeRepo.findById(cliDto.getCidadeId()).orElseThrow(() -> new ObjectNotFoundException("Cidade não encontrada! id: "
 				+ cliDto.getCidadeId()));

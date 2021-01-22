@@ -30,6 +30,9 @@ public class ClienteNewDTO implements Serializable {
 	@Email(message = "Email inválido")
 	private String email;
 	
+	@NotEmpty
+	private String senha;
+	
 	@CPF(groups = CpfGroup.class, message = "CPF Inválido")
 	@CNPJ(groups = CnpjGroup.class, message = "CNPJ Inválido")
 	private String cpfOuCnpj;
@@ -161,6 +164,14 @@ public class ClienteNewDTO implements Serializable {
 
 	public void setCidadeId(Integer cidadeId) {
 		this.cidadeId = cidadeId;
+	}
+	
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 	
 	
