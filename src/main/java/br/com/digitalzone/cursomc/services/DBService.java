@@ -20,6 +20,7 @@ import br.com.digitalzone.cursomc.domain.PagamentoComCartao;
 import br.com.digitalzone.cursomc.domain.Pedido;
 import br.com.digitalzone.cursomc.domain.Produto;
 import br.com.digitalzone.cursomc.domain.enums.EstadoPagamento;
+import br.com.digitalzone.cursomc.domain.enums.Perfil;
 import br.com.digitalzone.cursomc.domain.enums.tipocliente.TipoCliente;
 import br.com.digitalzone.cursomc.repositories.CategoriaRepository;
 import br.com.digitalzone.cursomc.repositories.CidadeRepository;
@@ -124,17 +125,28 @@ public class DBService {
 
 		Cliente cli1 = new Cliente(null, "Maria Silva", "luizmecina@gmail.com", "37042810007", TipoCliente.PESSOAFISICA,
 				pEnc.encode("abc123"));
-
+		
 		cli1.getTelefones().addAll(Arrays.asList("18996180932", "18997180932"));
-
+		
 		Endereco e1 = new Endereco(null, "Rua flores", "300", "apto 303", "Jardim", "38220834", cli1, c1);
 
 		Endereco e2 = new Endereco(null, "Avenida Matos", "105", "Sala 800", "Centro", "38220812", cli1, c2);
+		
+		//-----------------CLI 2--------------------------------------
+		
+		Cliente cli2 = new Cliente(null, "Anna Silva", "lfelipe1993@live.com", "71533353077", TipoCliente.PESSOAFISICA,
+				pEnc.encode("abc123"));
+		cli2.addPerfil(Perfil.ADMIN);
+
+		cli2.getTelefones().addAll(Arrays.asList("18996180911", "18997180232"));
+
+		Endereco e3 = new Endereco(null, "Avenida Judas", "222", null, "Centro", "38220812", cli1, c2);
 
 		cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
+		cli2.getEnderecos().addAll(Arrays.asList(e3));
 
-		clienteRepository.saveAll(Arrays.asList(cli1));
-		enderecoRepository.saveAll(Arrays.asList(e1, e2));
+		clienteRepository.saveAll(Arrays.asList(cli1,cli2));
+		enderecoRepository.saveAll(Arrays.asList(e1, e2,e3));
 
 		// -----------------------------------------------------------
 
