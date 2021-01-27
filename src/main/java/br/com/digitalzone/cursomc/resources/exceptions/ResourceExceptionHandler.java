@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -44,5 +45,15 @@ public class ResourceExceptionHandler {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
 		
 	}
+	
+	//Tratar erro quando user nao tem as permissões
+	@ExceptionHandler(value = {AccessDeniedException.class})
+    public ResponseEntity<StandardError> handleUserServiceException(AccessDeniedException e, HttpServletRequest request) {
+		
+		StandardError err = new StandardError(HttpStatus.BAD_REQUEST.value(), e.getMessage(),
+				OffsetDateTime.now());
+		
+		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);
+    }
 
 }
