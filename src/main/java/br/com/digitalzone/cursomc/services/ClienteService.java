@@ -1,5 +1,6 @@
 package br.com.digitalzone.cursomc.services;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import br.com.digitalzone.cursomc.domain.Cidade;
 import br.com.digitalzone.cursomc.domain.Cliente;
@@ -38,6 +40,8 @@ public class ClienteService {
 	private EnderecoRepository enderecoRepo;
 	@Autowired
 	BCryptPasswordEncoder pEnc;
+	@Autowired
+	private S3Service s3Service;
 
 	public Cliente find(Integer id) {
 		UserSS user = UserService.authenticated();
@@ -118,5 +122,9 @@ public class ClienteService {
 	private void updateData(Cliente newCli,Cliente cli) {
 		newCli.setNome(cli.getNome());
 		newCli.setEmail(cli.getEmail());
+	}
+	
+	public URI uploadProfilePicture(MultipartFile file) {
+		return s3Service.uploadFile(file);
 	}
 }
