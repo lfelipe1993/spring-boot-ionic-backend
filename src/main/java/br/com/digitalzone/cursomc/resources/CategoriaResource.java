@@ -24,6 +24,9 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import br.com.digitalzone.cursomc.domain.Categoria;
 import br.com.digitalzone.cursomc.resources.dto.CategoriaDTO;
 import br.com.digitalzone.cursomc.services.CategoriaService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping(value = "/categorias")
@@ -32,6 +35,7 @@ public class CategoriaResource {
 	@Autowired
 	private CategoriaService service;
 
+	@ApiOperation(value="Busca por id")
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Categoria> find(@PathVariable Integer id) {
 
@@ -41,6 +45,7 @@ public class CategoriaResource {
 
 	}
 
+	@ApiOperation(value="Insere categoria")
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PostMapping
 	public ResponseEntity<Void> insert(@RequestBody @Valid CategoriaDTO catDto) {
@@ -52,6 +57,7 @@ public class CategoriaResource {
 
 	}
 
+	@ApiOperation(value="Atualiza uma categoria")
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<Void> update(@PathVariable Integer id, @Valid @RequestBody CategoriaDTO catDto) {
@@ -62,6 +68,10 @@ public class CategoriaResource {
 		return ResponseEntity.noContent().build();
 	}
 	
+	@ApiOperation(value="deleta uma categoria")
+	@ApiResponses(value = {
+			@ApiResponse(code = 400, message = "Não é possível excluir uma categoria que possui produtos"),
+			@ApiResponse(code = 404, message = "Código inexistente") })
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
@@ -72,6 +82,7 @@ public class CategoriaResource {
 
 	}
 
+	@ApiOperation(value="Busca todas categorias")
 	@GetMapping()
 	public ResponseEntity<List<CategoriaDTO>> findAll() {
 
@@ -83,6 +94,7 @@ public class CategoriaResource {
 
 	}
 	
+	@ApiOperation(value="Busca de categorias paginada")
 	@GetMapping(value = "/page")
 	public ResponseEntity<Page<CategoriaDTO>> findPage(
 			@RequestParam(value="page", defaultValue="0") Integer page,
